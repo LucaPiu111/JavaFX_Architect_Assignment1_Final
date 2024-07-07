@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>ViewGameBoard.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #5f826b; font-style: italic;}
+.s4 { color: #67a37c; font-style: italic;}
+.s5 { color: #7a7e85;}
+.s6 { color: #6aab73;}
+.s7 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ViewGameBoard.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">edu</span><span class="s2">.</span><span class="s1">sdccd</span><span class="s2">.</span><span class="s1">cisc191</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">application</span><span class="s2">.</span><span class="s1">Application</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Scene</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">BorderPane</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">HBox</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">VBox</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">Stage</span><span class="s2">;</span>
+
+<span class="s3">/**</span>
+ <span class="s3">* Presents the user with the game graphical user interface</span>
+ <span class="s3">*/</span>
+<span class="s0">public class </span><span class="s1">ViewGameBoard </span><span class="s0">extends </span><span class="s1">Application</span>
+<span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">ControllerGameBoard controller</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">GameBoardLabel fishRemaining</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">GameBoardLabel guessesRemaining</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">GameBoardLabel message</span><span class="s2">;</span>
+
+    <span class="s3">/**</span>
+     <span class="s3">* launches the JavaFX application</span>
+     <span class="s3">* </span><span class="s4">@param </span><span class="s3">args command line input parameters</span>
+     <span class="s3">*/</span>
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">)</span>
+    <span class="s2">{</span>
+        <span class="s5">// launch the app</span>
+        <span class="s1">launch</span><span class="s2">(</span><span class="s1">args</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">/**</span>
+     <span class="s3">* This method updates the header on the application</span>
+     <span class="s3">*/</span>
+
+    <span class="s0">public void </span><span class="s1">updateHeader</span><span class="s2">() {</span>
+        <span class="s5">//update labels</span>
+        <span class="s1">fishRemaining</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s6">&quot;Fish: &quot; </span><span class="s2">+ </span><span class="s1">controller</span><span class="s2">.</span><span class="s1">modelGameBoard</span><span class="s2">.</span><span class="s1">getFishRemaining</span><span class="s2">());</span>
+        <span class="s1">guessesRemaining</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s6">&quot;Bait: &quot; </span><span class="s2">+ </span><span class="s1">controller</span><span class="s2">.</span><span class="s1">modelGameBoard</span><span class="s2">.</span><span class="s1">getGuessesRemaining</span><span class="s2">());</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">controller</span><span class="s2">.</span><span class="s1">fishWin</span><span class="s2">()) {</span>
+            <span class="s1">message</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s6">&quot;Fishes win!&quot;</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">else if</span><span class="s2">(</span><span class="s1">controller</span><span class="s2">.</span><span class="s1">playerWins</span><span class="s2">()) {</span>
+            <span class="s1">message</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s6">&quot;You win!&quot;</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">message</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s6">&quot;Find the fish!&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">start</span><span class="s2">(</span><span class="s1">Stage stage</span><span class="s2">) </span><span class="s0">throws </span><span class="s1">Exception </span><span class="s2">{</span>
+        <span class="s1">controller </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ControllerGameBoard</span><span class="s2">();</span>
+        <span class="s1">fishRemaining </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GameBoardLabel</span><span class="s2">();</span>
+        <span class="s1">guessesRemaining </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GameBoardLabel</span><span class="s2">();</span>
+        <span class="s1">message </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GameBoardLabel</span><span class="s2">();</span>
+
+        <span class="s1">BorderPane root </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BorderPane</span><span class="s2">();</span>
+
+        <span class="s1">updateHeader</span><span class="s2">();</span>
+
+        <span class="s1">HBox header </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HBox</span><span class="s2">(</span><span class="s1">fishRemaining</span><span class="s2">, </span><span class="s1">guessesRemaining</span><span class="s2">, </span><span class="s1">message</span><span class="s2">);</span>
+        <span class="s1">root</span><span class="s2">.</span><span class="s1">setTop</span><span class="s2">(</span><span class="s1">header</span><span class="s2">);</span>
+
+        <span class="s1">VBox vbox </span><span class="s2">= </span><span class="s0">new </span><span class="s1">VBox</span><span class="s2">(</span><span class="s1">ModelGameBoard</span><span class="s2">.</span><span class="s1">DIMENSION</span><span class="s2">);</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">row</span><span class="s2">=</span><span class="s7">0</span><span class="s2">; </span><span class="s1">row </span><span class="s2">&lt; </span><span class="s1">ModelGameBoard</span><span class="s2">.</span><span class="s1">DIMENSION</span><span class="s2">; </span><span class="s1">row</span><span class="s2">++) {</span>
+            <span class="s1">HBox hbox </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HBox</span><span class="s2">(</span><span class="s1">ModelGameBoard</span><span class="s2">.</span><span class="s1">DIMENSION</span><span class="s2">);</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">col</span><span class="s2">=</span><span class="s7">0</span><span class="s2">; </span><span class="s1">col </span><span class="s2">&lt; </span><span class="s1">ModelGameBoard</span><span class="s2">.</span><span class="s1">DIMENSION</span><span class="s2">; </span><span class="s1">col</span><span class="s2">++) {</span>
+                <span class="s1">GameBoardButton button </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GameBoardButton</span><span class="s2">(</span><span class="s1">row</span><span class="s2">, </span><span class="s1">col</span><span class="s2">, </span><span class="s1">controller</span><span class="s2">.</span><span class="s1">modelGameBoard</span><span class="s2">.</span><span class="s1">fishAt</span><span class="s2">(</span><span class="s1">row</span><span class="s2">,</span><span class="s1">col</span><span class="s2">));</span>
+                <span class="s0">int </span><span class="s1">finalRow </span><span class="s2">= </span><span class="s1">row</span><span class="s2">;</span>
+                <span class="s0">int </span><span class="s1">finalCol </span><span class="s2">= </span><span class="s1">col</span><span class="s2">;</span>
+                <span class="s1">button</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">e -&gt; </span><span class="s2">{</span>
+                    <span class="s1">controller</span><span class="s2">.</span><span class="s1">makeGuess</span><span class="s2">(</span><span class="s1">finalRow</span><span class="s2">, </span><span class="s1">finalCol</span><span class="s2">);</span>
+                    <span class="s0">if</span><span class="s2">(!</span><span class="s1">controller</span><span class="s2">.</span><span class="s1">isGameOver</span><span class="s2">()) {</span>
+                        <span class="s1">button</span><span class="s2">.</span><span class="s1">handleClick</span><span class="s2">();</span>
+                        <span class="s1">updateHeader</span><span class="s2">();</span>
+                    <span class="s2">}</span>
+                <span class="s2">});</span>
+                <span class="s1">hbox</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">col</span><span class="s2">, </span><span class="s1">button</span><span class="s2">);</span>
+            <span class="s2">}</span>
+            <span class="s1">vbox</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">row</span><span class="s2">, </span><span class="s1">hbox</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s5">// create scene, stage, set title, and show</span>
+        <span class="s1">root</span><span class="s2">.</span><span class="s1">setCenter</span><span class="s2">(</span><span class="s1">vbox</span><span class="s2">);</span>
+        <span class="s1">Scene scene </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">root</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s1">scene</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s6">&quot;Gone Fishing&quot;</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">setResizable</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

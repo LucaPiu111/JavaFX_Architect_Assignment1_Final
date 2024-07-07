@@ -1,0 +1,99 @@
+<html>
+<head>
+<title>ModelGameBoard.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #5f826b; font-style: italic;}
+.s5 { color: #2aacb8;}
+.s6 { color: #67a37c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ModelGameBoard.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">edu</span><span class="s2">.</span><span class="s1">sdccd</span><span class="s2">.</span><span class="s1">cisc191</span><span class="s2">;</span>
+
+<span class="s3">// Adapted from GoneFishing by Tasha Frankie and Allan Schougaard</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Random</span><span class="s2">;</span>
+
+<span class="s4">/**</span>
+ <span class="s4">* Contains all the data required for the game play</span>
+ <span class="s4">*/</span>
+<span class="s0">public class </span><span class="s1">ModelGameBoard</span>
+<span class="s2">{</span>
+    <span class="s0">public static int </span><span class="s1">DIMENSION </span><span class="s2">= </span><span class="s5">6</span><span class="s2">;</span>
+    <span class="s0">public static int </span><span class="s1">GUESSES </span><span class="s2">= </span><span class="s5">30</span><span class="s2">;</span>
+    <span class="s0">public static int </span><span class="s1">TOTAL_FISH </span><span class="s2">= </span><span class="s5">10</span><span class="s2">;</span>
+
+    <span class="s0">private boolean</span><span class="s2">[][] </span><span class="s1">gameBoard</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">guessesRemaining</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">fishRemaining</span><span class="s2">;</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* Initializes the game board with fish</span>
+     <span class="s4">*/</span>
+    <span class="s0">public </span><span class="s1">ModelGameBoard</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s1">gameBoard </span><span class="s2">= </span><span class="s0">new boolean</span><span class="s2">[</span><span class="s1">DIMENSION</span><span class="s2">][</span><span class="s1">DIMENSION</span><span class="s2">];  </span><span class="s3">// defaults to false</span>
+        <span class="s1">guessesRemaining </span><span class="s2">= </span><span class="s1">GUESSES</span><span class="s2">;</span>
+        <span class="s1">fishRemaining </span><span class="s2">= </span><span class="s1">TOTAL_FISH</span><span class="s2">;</span>
+        <span class="s1">Random randomNumberGenerator </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Random</span><span class="s2">();</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">fishCounter </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">fishCounter </span><span class="s2">&lt; </span><span class="s1">TOTAL_FISH</span><span class="s2">; </span><span class="s1">fishCounter</span><span class="s2">++)</span>
+        <span class="s2">{</span>
+            <span class="s0">int </span><span class="s1">x</span><span class="s2">, </span><span class="s1">y</span><span class="s2">;</span>
+            <span class="s3">// finds an empty gameBoard slot</span>
+            <span class="s0">do</span>
+            <span class="s2">{</span>
+                <span class="s1">x </span><span class="s2">= </span><span class="s1">randomNumberGenerator</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">(</span><span class="s1">DIMENSION</span><span class="s2">);</span>
+                <span class="s1">y </span><span class="s2">= </span><span class="s1">randomNumberGenerator</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">(</span><span class="s1">DIMENSION</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">while </span><span class="s2">(</span><span class="s1">gameBoard</span><span class="s2">[</span><span class="s1">x</span><span class="s2">][</span><span class="s1">y</span><span class="s2">]);</span>
+            <span class="s1">gameBoard</span><span class="s2">[</span><span class="s1">x</span><span class="s2">][</span><span class="s1">y</span><span class="s2">] = </span><span class="s0">true</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* </span><span class="s6">@param </span><span class="s4">row</span>
+     <span class="s4">* </span><span class="s6">@param </span><span class="s4">col</span>
+     <span class="s4">* </span><span class="s6">@return </span><span class="s4">Returns true if fish is found at row,col</span>
+     <span class="s4">*/</span>
+    <span class="s0">public boolean </span><span class="s1">fishAt</span><span class="s2">(</span><span class="s0">int </span><span class="s1">row</span><span class="s2">, </span><span class="s0">int </span><span class="s1">col</span><span class="s2">)</span>
+    <span class="s2">{</span>
+        <span class="s0">return </span><span class="s1">gameBoard</span><span class="s2">[</span><span class="s1">row</span><span class="s2">][</span><span class="s1">col</span><span class="s2">];</span>
+    <span class="s2">}</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* </span><span class="s6">@param </span><span class="s4">row</span>
+     <span class="s4">* </span><span class="s6">@param </span><span class="s4">col</span>
+     <span class="s4">* </span><span class="s6">@return </span><span class="s4">Returns true if fish is found at row,col and updates counters</span>
+     <span class="s4">*/</span>
+    <span class="s0">public boolean </span><span class="s1">makeGuess</span><span class="s2">(</span><span class="s0">int </span><span class="s1">row</span><span class="s2">, </span><span class="s0">int </span><span class="s1">col</span><span class="s2">)</span>
+    <span class="s2">{</span>
+        <span class="s0">boolean </span><span class="s1">foundFish </span><span class="s2">= </span><span class="s1">fishAt</span><span class="s2">(</span><span class="s1">row</span><span class="s2">, </span><span class="s1">col</span><span class="s2">);</span>
+        <span class="s1">guessesRemaining</span><span class="s2">--;</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">foundFish</span><span class="s2">)</span>
+        <span class="s2">{</span>
+            <span class="s1">fishRemaining</span><span class="s2">--;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">return </span><span class="s1">foundFish</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">getGuessesRemaining</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s0">return </span><span class="s1">guessesRemaining</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">getFishRemaining</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s0">return </span><span class="s1">fishRemaining</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

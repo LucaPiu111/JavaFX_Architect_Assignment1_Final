@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>ControllerGameBoard.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #5f826b; font-style: italic;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ControllerGameBoard.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">edu</span><span class="s2">.</span><span class="s1">sdccd</span><span class="s2">.</span><span class="s1">cisc191</span><span class="s2">;</span>
+
+<span class="s3">/**</span>
+ <span class="s3">* Manages the game rules and logic</span>
+ <span class="s3">*/</span>
+<span class="s0">public class </span><span class="s1">ControllerGameBoard</span>
+<span class="s2">{</span>
+    <span class="s0">protected </span><span class="s1">ModelGameBoard modelGameBoard</span><span class="s2">;</span>
+    <span class="s0">private boolean </span><span class="s1">gameOver</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">ControllerGameBoard</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">modelGameBoard </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ModelGameBoard</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">fishWin</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s0">boolean </span><span class="s1">fishWin </span><span class="s2">= </span><span class="s1">modelGameBoard</span><span class="s2">.</span><span class="s1">getGuessesRemaining</span><span class="s2">() == </span><span class="s4">0 </span><span class="s2">&amp;&amp; </span><span class="s1">modelGameBoard</span><span class="s2">.</span><span class="s1">getFishRemaining</span><span class="s2">() &gt; </span><span class="s4">0</span><span class="s2">;</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">fishWin</span><span class="s2">) {</span>
+            <span class="s1">gameOver </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">fishWin</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">playerWins</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s0">boolean </span><span class="s1">playerWins </span><span class="s2">= </span><span class="s1">modelGameBoard</span><span class="s2">.</span><span class="s1">getFishRemaining</span><span class="s2">() == </span><span class="s4">0</span><span class="s2">;</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">playerWins</span><span class="s2">) {</span>
+            <span class="s1">gameOver </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">playerWins</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">makeGuess</span><span class="s2">(</span><span class="s0">int </span><span class="s1">row</span><span class="s2">, </span><span class="s0">int </span><span class="s1">col</span><span class="s2">) {</span>
+        <span class="s0">if</span><span class="s2">(!</span><span class="s1">gameOver</span><span class="s2">) {</span>
+            <span class="s0">return </span><span class="s1">modelGameBoard</span><span class="s2">.</span><span class="s1">makeGuess</span><span class="s2">(</span><span class="s1">row</span><span class="s2">, </span><span class="s1">col</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">return false</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">isGameOver</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">gameOver</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>
